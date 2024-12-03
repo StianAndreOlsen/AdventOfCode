@@ -1,0 +1,23 @@
+# Build folders
+build-*
+Debug
+Release
+
+# Rebuildable files
+Thumbs.db
+*.ncb
+*.opensdf
+*.sdf
+*.suo
+*.user
+*.user.*
+*.VC.db
+
+# Tool folder
+2024/src/.vs
+
+# Output folder
+2024/bin/*
+
+# Library links
+2024/src/Libraries/*/*

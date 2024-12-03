@@ -1,0 +1,2 @@
+The sum of all valid mul instructions are 171183089
+The sum of all valid mul instructions marked with do() are 63866497

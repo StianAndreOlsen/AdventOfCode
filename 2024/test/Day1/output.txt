@@ -1,0 +1,3 @@
+1000 x 2 location ids read
+Total distance is 1341714
+Similarity score is 27384707

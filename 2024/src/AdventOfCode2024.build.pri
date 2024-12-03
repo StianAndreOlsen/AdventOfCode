@@ -1,0 +1,2 @@
+LIBRARIES_INCLUDE_DIR = $$(SAO_Source)\AdventOfCode\2024\src\Libraries
+LIBRARIES_LIB_DIR = $$(LIBRARIESLIB)

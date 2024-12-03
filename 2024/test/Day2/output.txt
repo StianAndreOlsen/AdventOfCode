@@ -1,0 +1,2 @@
+There are 332 safe reports and 668 unsafe reports
+There are 398 safe problem damped reports and 602 unsafe problem damped reports

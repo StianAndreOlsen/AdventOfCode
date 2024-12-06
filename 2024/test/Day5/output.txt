@@ -1,0 +1,2 @@
+The sum of middle pages from ordered updates is 5713
+The sum of middle pages from unordered updates is 5180

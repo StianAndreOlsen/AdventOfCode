@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <PropertyGroup Label="UserMacros">
+    <AdventOfCodeInstallDir>$(SAO_Source)\AdventOfCode\2024\bin\</AdventOfCodeInstallDir>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <BuildMacro Include="AdventOfCodeInstallDir">
+      <Value>$(AdventOfCodeInstallDir)</Value>
+    </BuildMacro>
+  </ItemGroup>
+
+  <PropertyGroup Condition="'$(Configuration)'=='Debug'">
+    <LocalDebuggerCommandArguments>&lt; input.txt</LocalDebuggerCommandArguments>
+    <LocalDebuggerWorkingDirectory>$(SolutionDir)\test\$(TargetName)</LocalDebuggerWorkingDirectory>
+  </PropertyGroup>
+
+  <ItemDefinitionGroup Condition="'$(Configuration)'=='Release'">
+    <PostBuildEvent>
+      <Command>copy "$(TargetPath)" "$(AdventOfCodeInstallDir)"</Command>
+      <Message>Copying "$(TargetPath)" to "$(AdventOfCodeInstallDir)"...</Message>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+
+</Project>

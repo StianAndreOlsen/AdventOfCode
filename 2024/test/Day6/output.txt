@@ -1,2 +1,2 @@
 The guard will visit 5101 distinct positions
-The obstruction can be placed in 1889 different positions
+The obstruction can be placed in 1951 different positions

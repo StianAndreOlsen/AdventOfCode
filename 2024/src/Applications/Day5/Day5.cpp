@@ -49,7 +49,7 @@ bool Update::isOrdered(const Rules& rules, size_t* pi, size_t* pj) const
 	for (size_t i = 0; i < size()-1; ++i)
 	for (size_t j = i+1; j < size(); ++j)
 	{
-		for (auto rule : rules)
+		for (const auto& rule : rules)
 		{
 			if (at(i) == rule.second && at(j) == rule.first)
 			{
@@ -107,8 +107,8 @@ int main(int /*argc*/, char* /*argv*/[])
 			sumUnordered += update.middlePage();
 		}
 	}
-	std::cout << "The sum of middle pages from ordered updates is " << sumOrdered << '\n';
-	std::cout << "The sum of middle pages from unordered updates is " << sumUnordered << '\n';
+	std::cout << "The sum of middle pages from ordered updates is " << sumOrdered << std::endl;
+	std::cout << "The sum of middle pages from unordered updates is " << sumUnordered << std::endl;
 
 	return 0;
 }

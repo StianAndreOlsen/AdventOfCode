@@ -13,7 +13,7 @@
 
   <PropertyGroup Condition="'$(Configuration)'=='Debug'">
     <LocalDebuggerCommandArguments>&lt; input.txt</LocalDebuggerCommandArguments>
-    <LocalDebuggerWorkingDirectory>$(SolutionDir)\test\$(TargetName)</LocalDebuggerWorkingDirectory>
+    <LocalDebuggerWorkingDirectory>$(SolutionDir)\..\test\$(TargetName)</LocalDebuggerWorkingDirectory>
   </PropertyGroup>
 
   <ItemDefinitionGroup Condition="'$(Configuration)'=='Release'">

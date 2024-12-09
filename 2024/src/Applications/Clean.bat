@@ -9,5 +9,6 @@ call "%clean%" app Day3
 call "%clean%" app Day4
 call "%clean%" app Day5
 call "%clean%" app Day6
+call "%clean%" app Day7
 
 if not "%~1"=="continue" pause

@@ -11,7 +11,7 @@ int mul(const std::string& mulstr)
 	char c = 0;
 	if (iss >> x >> c >> y)
 		m = x * y;
-//	std::cout << mulstr << " = " << m << '\n';
+//	std::cout << mulstr << " = " << m << std::endl;
 	return m;
 }
 
@@ -19,9 +19,7 @@ long long sumMul(std::string::const_iterator begin, std::string::const_iterator 
 {
 	long long sum = 0;
 	const std::regex mulRegex("mul\\([0-9]{1,3},[0-9]{1,3}\\)");
-	auto mulBegin = std::sregex_iterator(begin, end, mulRegex);
-	auto mulEnd = std::sregex_iterator();
-	for (auto i = mulBegin; i != mulEnd; ++i)
+	for (auto i = std::sregex_iterator(begin, end, mulRegex); i != std::sregex_iterator(); ++i)
 	{
 		std::smatch match = *i;
 		sum += mul(match.str());
@@ -38,7 +36,7 @@ int main(int /*argc*/, char* /*argv*/[])
 
 	// part 1
 	long long sum = sumMul(file.cbegin(), file.cend());
-	std::cout << "The sum of all valid mul instructions are " << sum << '\n';
+	std::cout << "The sum of all valid mul instructions are " << sum << std::endl;
 
 	// part 2
 	sum = 0;
@@ -50,7 +48,7 @@ int main(int /*argc*/, char* /*argv*/[])
 		sum += sumMul(file.cbegin() + i0, file.cbegin() + in);
 	}
 	while ((i0 = file.find("do()", in)) != std::string::npos);
-	std::cout << "The sum of all valid mul instructions marked with do() are " << sum << '\n';
+	std::cout << "The sum of all valid mul instructions marked with do() are " << sum << std::endl;
 
 	return 0;
 }

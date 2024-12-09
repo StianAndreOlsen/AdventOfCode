@@ -1,0 +1,2 @@
+The sum of all valid calibration results using 2 operators are 1298300076754
+The sum of all valid calibration results using 3 operators are 248427118972289

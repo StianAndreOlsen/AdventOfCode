@@ -20,27 +20,27 @@ struct Direction
 	Direction(int dx, int dy) : di(dx), dj(dy) {}
 	bool operator==(const Direction& rhs) const { return di == rhs.di && dj == rhs.dj; }
 	bool operator!=(const Direction& rhs) const { return !(*this == rhs); }
-	bool operator<(const Direction& rhs) const { return !(*this == rhs); }
+	bool operator<(const Direction& rhs) const { return dj < rhs.dj || (dj == rhs.dj && di < rhs.di); }
 };
 
-Direction turnRight(Direction dir)
+Direction turnRight(const Direction& dir)
 {
 	return Direction(-dir.dj, dir.di);
 }
 
-Position operator+(Position p, Direction d)
+Position operator+(const Position& pos, const Direction& dir)
 {
-	return Position(p.i + d.di, p.j + d.dj);
+	return Position(pos.i + dir.di, pos.j + dir.dj);
 }
 
 struct Pose
 {
-	Position pos;
-	Direction dir;
-	Pose(Position p, Direction d) : pos(p), dir(d) {}
-	bool operator==(const Pose& rhs) const { return pos == rhs.pos && dir == rhs.dir; }
+	Position p;
+	Direction d;
+	Pose(const Position& pos, const Direction& dir) : p(pos), d(dir) {}
+	bool operator==(const Pose& rhs) const { return p == rhs.p && d == rhs.d; }
 	bool operator!=(const Pose& rhs) const { return !(*this == rhs); }
-	bool operator<(const Pose& rhs) const { return pos < rhs.pos || dir < rhs.dir; }
+	bool operator<(const Pose& rhs) const { return p < rhs.p || (p == rhs.p && d < rhs.d); }
 };
 
 class Map
@@ -54,9 +54,9 @@ public:
 	bool isValid(size_t i, size_t j) const { return i < ni() && j < nj(); }
 	char val(size_t i, size_t j) const { return rows[j][i]; }
 	void setVal(size_t i, size_t j, char val) { rows[j][i] = val; }
-	bool isValid(Position p) const { return isValid(p.i, p.j); }
-	char val(Position p) const { return val(p.i, p.j); }
-	void setVal(Position p, char val) { setVal(p.i, p.j, val); }
+	bool isValid(const Position& pos) const { return isValid(pos.i, pos.j); }
+	char val(const Position& pos) const { return val(pos.i, pos.j); }
+	void setVal(const Position& pos, char val) { setVal(pos.i, pos.j, val); }
 	Position find(char val) const;
 };
 
@@ -78,15 +78,15 @@ Position Map::find(char val) const
 	{
 		auto i = rows[j].find(val);
 		if (i != std::string::npos)
-			return Position(i,j);
+			return Position(i, j);
 	}
 	return Position(std::string::npos, std::string::npos);
 }
 
-Position next(const Map& map, Position pos, Direction& dir)
+Position next(const Map& map, const Position& pos, Direction& dir)
 {
 	auto next = pos + dir;
-	if (map.isValid(next) && map.val(next) == '#')
+	while (map.isValid(next) && map.val(next) == '#')
 	{
 		dir = turnRight(dir);
 		next = pos + dir;
@@ -105,6 +105,11 @@ int main(int /*argc*/, char* /*argv*/[])
 
 	// find start position and flag as a position without any obstructions
 	Position p0 = map.find('^');
+	if (!map.isValid(p0))
+	{
+		std::cout << "No start position found" << std::endl;
+		return 0;
+	}
 	map.setVal(p0, '.');
 
 	// part 1
@@ -116,11 +121,8 @@ int main(int /*argc*/, char* /*argv*/[])
 
 	// part 2
 	size_t obstructions = 0;
-	for (auto pos : positions)
-//	for (size_t j = 0; j < map.nj(); ++j)
-//	for (size_t i = 0; i < map.ni(); ++i)
+	for (const auto& pos : positions)
 	{
-//		Position pos(i, j);
 		if (pos != p0 && map.val(pos) == '.')
 		{
 			map.setVal(pos, '#');

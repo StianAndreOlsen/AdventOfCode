@@ -72,7 +72,7 @@ int main(int /*argc*/, char* /*argv*/[])
 	}
 
 	// print results
-	std::cout << "There are " << safeReports << " safe reports and " << unsafeReports << " unsafe reports\n";
-	std::cout << "There are " << safeProblemDampedReports << " safe problem damped reports and " << unsafeProblemDampedReports << " unsafe problem damped reports\n";
+	std::cout << "There are " << safeReports << " safe reports and " << unsafeReports << " unsafe reports" << std::endl;
+	std::cout << "There are " << safeProblemDampedReports << " safe problem damped reports and " << unsafeProblemDampedReports << " unsafe problem damped reports" << std::endl;
 	return 0;
 }

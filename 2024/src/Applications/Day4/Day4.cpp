@@ -33,7 +33,7 @@ public:
 	char val(size_t i, size_t j) const { return rows[j][i]; }
 	std::string row(size_t j) const { return rows.at(j); }
 	std::string col(size_t i) const;
-	std::string diag(size_t i0, size_t j0, size_t di, size_t dj) const;
+	std::string diag(size_t i0, size_t j0, int di, int dj) const;
 	size_t countHorizontal(const std::string& substr) const;
 	size_t countVertical(const std::string& substr) const;
 	size_t countMajorDiagonal(const std::string& substr) const;
@@ -63,10 +63,9 @@ std::string CharMatrix::col(size_t i) const
 	return col;
 }
 
-std::string CharMatrix::diag(size_t i0, size_t j0, size_t di, size_t dj) const
+std::string CharMatrix::diag(size_t i0, size_t j0, int di, int dj) const
 {
 	std::string diag;
-	auto ni = colCount();
 	auto nj = rowCount();
 	auto i = i0;
 	auto j = j0;
@@ -94,7 +93,6 @@ size_t CharMatrix::countVertical(const std::string& substr) const
 size_t CharMatrix::countMajorDiagonal(const std::string& substr) const
 {
 	size_t n = 0;
-	auto ni = colCount();
 	auto nj = rowCount();
 	size_t i = 0;
 	size_t j = nj-1;
@@ -108,7 +106,6 @@ size_t CharMatrix::countMajorDiagonal(const std::string& substr) const
 size_t CharMatrix::countMinorDiagonal(const std::string& substr) const
 {
 	size_t n = 0;
-	auto ni = colCount();
 	auto nj = rowCount();
 	size_t i = 0;
 	size_t j = 0;
@@ -132,7 +129,6 @@ size_t CharMatrix::countAll(const std::string& substr) const
 size_t CharMatrix::countCrossMAS() const
 {
 	size_t n = 0;
-	auto ni = colCount();
 	auto nj = rowCount();
 	for (size_t i = 1; i < ni-1; ++i)
 	for (size_t j = 1; j < nj-1; ++j)
@@ -158,10 +154,10 @@ int main(int /*argc*/, char* /*argv*/[])
 
 	// part 1
 	std::string substr("XMAS");
-	std::cout << substr << " is found " << matrix.countAll(substr) << " times\n";
+	std::cout << substr << " is found " << matrix.countAll(substr) << " times" << std::endl;
 
 	// part 2
-	std::cout << "X-MAS is found " << matrix.countCrossMAS() << " times\n";
+	std::cout << "X-MAS is found " << matrix.countCrossMAS() << " times" << std::endl;
 
 	return 0;
 }
